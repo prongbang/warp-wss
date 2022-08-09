@@ -1,5 +1,5 @@
 # Tells docker to use the latest Rust official image
-FROM rust:latest
+FROM rust:alpine
 
 ENV HEROKU_PORT=$PORT
 ENV PORT=$HEROKU_PORT
