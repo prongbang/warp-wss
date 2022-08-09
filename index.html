@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+    window.onload = () => {
+        const hostname = window.location.hostname;
+        let port = hostname.indexOf("localhost") > -1 ? ":9231": "";
+        console.log(hostname);
+        console.log(port);
+        const BACKEND_URL = "wss://" + window.location.hostname + port +"/echo"
+        const socket = new WebSocket(BACKEND_URL)
+        socket.onopen = () =>  {
+            document.writeln("Socket Opened")
+            setInterval(_ => socket.send("Hello rust!"), 3000)
+        }
+        socket.onmessage = (msg) => document.writeln(msg.data)
+        socket.onerror = (err) => console.error(err)
+        socket.onclose = () => console.log("Socket Closed")
+    }
+</script>
+</body>
+</html>
